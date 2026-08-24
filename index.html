@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXT to Excel Converter</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    input, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 15px;
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #status {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>TXT → Excel Converter</h2>
+
+  <p>
+    Each line should contain 5 values separated by |
+  </p>
+
+  <input type="file" id="fileInput" accept=".txt">
+
+  <button onclick="convertFile()">
+    Convert & Download Excel
+  </button>
+
+  <div id="status"></div>
+</div>
+
+<script>
+function convertFile() {
+
+  const fileInput = document.getElementById("fileInput");
+  const status = document.getElementById("status");
+
+  if (!fileInput.files.length) {
+    status.textContent = "Please select a TXT file.";
+    return;
+  }
+
+  const file = fileInput.files[0];
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+
+    const text = event.target.result;
+
+    const lines = text
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => line.length > 0);
+
+    const rows = [
+      ["Column A", "Column B", "Column C", "Column D", "Column E"]
+    ];
+
+    for (const line of lines) {
+
+      const parts = line.split("|", 5);
+
+      while (parts.length < 5) {
+        parts.push("");
+      }
+
+      rows.push(parts);
+    }
+
+    const worksheet = XLSX.utils.aoa_to_sheet(rows);
+
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      "Data"
+    );
+
+    XLSX.writeFile(
+      workbook,
+      "converted.xlsx"
+    );
+
+    status.textContent =
+      `Done! ${lines.length} rows converted.`;
+  };
+
+  reader.readAsText(file);
+}
+</script>
+
+</body>
+  </html>
