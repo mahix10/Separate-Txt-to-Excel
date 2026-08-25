@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart TXT to XLSX Converter</title>
 
-  <!-- SheetJS -->
+  <title>Mahi xD - TXT to XLSX Converter</title>
+
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
   <style>
@@ -15,118 +15,167 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, #23395d 0%, transparent 30%),
-        radial-gradient(circle at top right, #3d1f5d 0%, transparent 25%),
-        linear-gradient(135deg, #08111f, #0f1b2d 45%, #111827);
       min-height: 100vh;
-      color: #fff;
-      padding-bottom: 50px;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+
+      background:
+        radial-gradient(circle at top left, #123c69 0%, transparent 30%),
+        radial-gradient(circle at top right, #5b247a 0%, transparent 28%),
+        linear-gradient(135deg, #07111f, #101b30 50%, #151026);
     }
 
     .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      background: rgba(18, 31, 49, 0.92);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
       position: sticky;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(10px);
+      z-index: 100;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 18px 25px;
+
+      background: rgba(8, 18, 34, 0.88);
+      backdrop-filter: blur(14px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .logo {
-      font-size: 28px;
-      font-weight: 800;
-      background: linear-gradient(90deg, #43c6ff, #9b5cff, #ff4fd8);
+      font-size: 29px;
+      font-weight: 900;
+
+      background: linear-gradient(
+        90deg,
+        #00e5ff,
+        #7c4dff,
+        #ff4081
+      );
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .menu {
-      font-size: 26px;
-      color: #cbd5e1;
+      font-size: 25px;
+      color: #dce6f3;
     }
 
     .container {
-      width: min(1000px, calc(100% - 24px));
+      width: min(1050px, calc(100% - 24px));
       margin: 28px auto;
+      padding-bottom: 40px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      margin-bottom: 8px;
+      font-size: 35px;
+
+      background: linear-gradient(
+        90deg,
+        #4dd0e1,
+        #ab47bc,
+        #ff5c8a
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #aebcd0;
+      line-height: 1.6;
     }
 
     .card {
-      background: rgba(27, 42, 63, 0.92);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(22, 36, 57, 0.91);
+
+      border: 1px solid rgba(255,255,255,0.09);
+
       border-radius: 20px;
+
       padding: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+
+      box-shadow:
+        0 15px 45px rgba(0,0,0,0.27);
     }
 
     .card h2 {
-      margin: 0 0 8px;
-      font-size: 28px;
+      margin-top: 0;
+      margin-bottom: 7px;
+      font-size: 26px;
     }
 
     .card p {
-      color: #aebed0;
+      color: #aebcd0;
       line-height: 1.6;
     }
 
     .upload-box {
-      border: 2px dashed #53677f;
+      padding: 35px 18px;
+
+      border: 2px dashed #526781;
       border-radius: 18px;
-      padding: 34px 20px;
+
       text-align: center;
+
       background: rgba(255,255,255,0.025);
-      transition: .25s;
+
+      transition: 0.25s;
     }
 
     .upload-box:hover {
-      border-color: #9a4dff;
-      background: rgba(154,77,255,0.05);
+      border-color: #a45cff;
+
+      background: rgba(164,92,255,0.06);
     }
 
     input[type="file"] {
       display: none;
     }
 
-    .choose-btn,
-    .main-btn,
-    .small-btn {
-      border: none;
-      cursor: pointer;
-      color: white;
-      font-weight: 700;
-      border-radius: 12px;
-      transition: .2s;
-    }
-
     .choose-btn {
       display: inline-block;
-      padding: 14px 24px;
-      background: linear-gradient(90deg, #2f80ed, #7b2cff);
+
       margin-top: 14px;
+
+      padding: 14px 25px;
+
+      border-radius: 12px;
+
+      background: linear-gradient(
+        90deg,
+        #008cff,
+        #7b2cff
+      );
+
+      cursor: pointer;
+      font-weight: bold;
+
+      box-shadow:
+        0 8px 20px rgba(66, 75, 255, 0.25);
+
+      transition: 0.2s;
     }
 
-    .choose-btn:hover,
-    .main-btn:hover,
-    .small-btn:hover {
+    .choose-btn:hover {
       transform: translateY(-2px);
-      filter: brightness(1.08);
+      filter: brightness(1.1);
     }
 
     .filename {
-      margin-top: 16px;
-      color: #64d8ff;
-      word-break: break-word;
-    }
+      margin-top: 17px;
 
-    .section-title {
-      font-size: 22px;
-      margin-bottom: 15px;
+      color: #5ce1ff;
+
+      word-break: break-all;
     }
 
     .field-grid {
@@ -136,40 +185,66 @@
     }
 
     .field-btn {
-      padding: 15px;
-      background: linear-gradient(135deg, #334155, #42536a);
-      color: #e8eef7;
-      border: 1px solid #52647d;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: .2s;
+
+      width: 100%;
+
+      padding: 15px;
+
+      color: #edf5ff;
+      font-size: 16px;
+
+      border: 1px solid #4a5e79;
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #293a52,
+          #354965
+        );
+
+      cursor: pointer;
+
+      transition: 0.2s;
     }
 
     .field-btn:hover {
-      border-color: #b14cff;
-      background: linear-gradient(135deg, #3b4d68, #4c3b69);
+      border-color: #c45cff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #334d70,
+          #553b77
+        );
+
+      transform: translateY(-1px);
     }
 
     .plus {
-      font-size: 24px;
+      font-size: 23px;
+      font-weight: bold;
     }
 
     .selected-box {
-      margin-top: 18px;
       min-height: 100px;
-      border: 2px dashed #53677f;
+
+      margin-top: 18px;
+
       padding: 18px;
+
+      border: 2px dashed #526781;
       border-radius: 15px;
-      background: rgba(255,255,255,.02);
+
+      background: rgba(255,255,255,0.02);
     }
 
     .label {
-      color: #9db0c5;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
+      color: #9eb1c7;
     }
 
     .chips {
@@ -179,43 +254,93 @@
     }
 
     .chip {
-      background: linear-gradient(90deg, #7b2cff, #ce29ff);
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 999px;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-weight: 700;
-      box-shadow: 0 5px 15px rgba(181, 48, 255, .25);
+
+      padding: 10px 15px;
+
+      border-radius: 999px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #692cff,
+          #d72cff
+        );
+
+      font-weight: bold;
+
+      box-shadow:
+        0 5px 17px rgba(190, 50, 255, 0.24);
     }
 
     .chip span {
       cursor: pointer;
       font-size: 18px;
-      opacity: .9;
+    }
+
+    .instructions {
+      margin: 16px 0;
+
+      padding: 13px 16px;
+
+      border-left: 4px solid #9a52ff;
+      border-radius: 10px;
+
+      background:
+        rgba(134, 86, 255, 0.12);
+
+      color: #e1d9ff;
+
+      line-height: 1.6;
     }
 
     .columns {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 12px;
+
       margin-top: 18px;
     }
 
     .column-box {
-      background: rgba(255,255,255,.035);
-      border: 1px solid #41526a;
-      border-radius: 15px;
-      min-height: 160px;
+      min-height: 170px;
+
       padding: 14px;
+
+      border: 1px solid #41546e;
+      border-radius: 15px;
+
+      background: rgba(255,255,255,0.03);
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .column-box:hover {
+      border-color: #788cff;
+    }
+
+    .active-column {
+      border: 2px solid #a451ff;
+
+      box-shadow:
+        0 0 20px rgba(164,81,255,0.3);
+
+      background:
+        rgba(159, 81, 255, 0.06);
     }
 
     .column-title {
+      margin-bottom: 13px;
+
       text-align: center;
+
+      color: #63dfff;
+
       font-weight: 800;
-      color: #67d7ff;
-      margin-bottom: 12px;
     }
 
     .column-fields {
@@ -225,98 +350,161 @@
     }
 
     .mini-chip {
-      background: linear-gradient(90deg, #ff4f93, #9d3cff);
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 13px;
       display: flex;
       align-items: center;
       gap: 7px;
+
       max-width: 100%;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff4d8d,
+          #843cff
+        );
+
+      font-size: 13px;
+
       word-break: break-word;
     }
 
     .mini-chip span {
       cursor: pointer;
+      font-weight: bold;
     }
 
-    .active-column {
-      border: 2px solid #a54cff !important;
-      box-shadow: 0 0 18px rgba(165,76,255,.35);
-    }
+    .section-title {
+      margin-top: 22px;
+      margin-bottom: 14px;
 
-    .instruction {
-      background: rgba(108,92,231,.12);
-      border-left: 4px solid #8c52ff;
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin: 15px 0;
-      color: #d8d0ff;
-    }
-
-    .preview {
-      overflow-x: auto;
-      margin-top: 16px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th,
-    td {
-      padding: 11px;
-      border: 1px solid #40516a;
-      text-align: left;
-      white-space: nowrap;
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    th {
-      background: #27364d;
-      color: #75ddff;
-    }
-
-    td {
-      background: rgba(255,255,255,.025);
+      font-size: 21px;
+      font-weight: bold;
     }
 
     .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 18px;
+
+      margin-top: 20px;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .main-btn,
+    .secondary-btn {
+      border: none;
+
+      padding: 15px 20px;
+
+      border-radius: 12px;
+
+      color: white;
+
+      font-size: 16px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s;
     }
 
     .main-btn {
       flex: 1;
-      min-width: 180px;
-      padding: 15px 20px;
-      font-size: 16px;
-      background: linear-gradient(90deg, #00b894, #2d98da, #8e44ad);
+      min-width: 190px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00b894,
+          #168eea,
+          #9b3cff
+        );
+
+      box-shadow:
+        0 8px 22px rgba(29, 129, 255, 0.2);
     }
 
-    .small-btn {
-      padding: 15px 20px;
-      background: #35465f;
+    .secondary-btn {
+      background: #364960;
+    }
+
+    .main-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .preview-wrap {
+      margin-top: 17px;
+
+      overflow-x: auto;
+
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 11px;
+
+      border: 1px solid #3c526d;
+
+      text-align: left;
+
+      white-space: nowrap;
+
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th {
+      background: #24364f;
+      color: #69e2ff;
+    }
+
+    td {
+      background: rgba(255,255,255,0.025);
     }
 
     .status {
       margin-top: 18px;
+
       white-space: pre-line;
-      color: #a8ffce;
-      line-height: 1.6;
+
+      color: #9bffc3;
+
+      line-height: 1.7;
     }
 
     .warning {
       color: #ffd166;
     }
 
-    @media (max-width: 800px) {
+    .footer {
+      padding: 15px;
+
+      text-align: center;
+
+      color: #7e90a8;
+
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
       .columns {
         grid-template-columns: 1fr;
       }
@@ -327,16 +515,34 @@
     }
 
     @media (max-width: 600px) {
+      .container {
+        width: calc(100% - 18px);
+      }
+
+      .navbar {
+        padding: 15px 16px;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 17px;
+      }
+
       .field-grid {
         grid-template-columns: 1fr 1fr;
       }
 
-      .card {
-        padding: 18px;
-      }
-
-      .card h2 {
-        font-size: 24px;
+      .field-btn {
+        padding: 13px 11px;
+        font-size: 14px;
       }
     }
   </style>
@@ -344,166 +550,288 @@
 
 <body>
 
-<div class="navbar">
-  <div class="logo">Mr SxR Converter</div>
-  <div class="menu">☰</div>
-</div>
+  <div class="navbar">
+    <div class="logo">Mahi xD</div>
+    <div class="menu">☰</div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
-  <!-- FILE UPLOAD -->
-  <div class="card">
-    <h2>TXT → XLSX Smart Converter</h2>
-    <p>
-      প্রথমে TXT file upload করো। তারপর তোমার TXT file-এর field order
-      নিজে select করো।
-    </p>
-
-    <div class="upload-box">
-      <div>Supports TXT files</div>
-
-      <label class="choose-btn" for="fileInput">
-        Choose TXT File
-      </label>
-
-      <input
-        type="file"
-        id="fileInput"
-        accept=".txt,text/plain"
-      />
-
-      <div class="filename" id="fileName">
-        No file selected
-      </div>
+    <div class="hero">
+      <h1>Mahi xD Converter</h1>
+      <p>
+        নিজের ইচ্ছামতো TXT format select করো এবং নিজের মতো Excel column তৈরি করো।
+      </p>
     </div>
+
+    <!-- FILE UPLOAD -->
+    <div class="card">
+
+      <h2>1. TXT File Upload</h2>
+
+      <p>
+        প্রথমে তোমার TXT file upload করো।
+      </p>
+
+      <div class="upload-box">
+
+        <div>
+          TXT File Select করো
+        </div>
+
+        <label
+          class="choose-btn"
+          for="fileInput"
+        >
+          Choose TXT File
+        </label>
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".txt,text/plain"
+        />
+
+        <div
+          class="filename"
+          id="fileName"
+        >
+          No file selected
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CURRENT FILE FORMAT -->
+    <div class="card">
+
+      <h2>2. Current TXT Format</h2>
+
+      <p>
+        তোমার TXT file-এর প্রতিটি লাইনে field যেই order-এ আছে,
+        ঠিক সেই order-এ নিচের option-গুলো click করো।
+      </p>
+
+      <div
+        class="field-grid"
+        id="currentFieldButtons"
+      ></div>
+
+      <div class="selected-box">
+
+        <div class="label">
+          Selected TXT Format:
+        </div>
+
+        <div
+          class="chips"
+          id="currentFormatChips"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- OUTPUT FORMAT -->
+    <div class="card">
+
+      <h2>3. Excel Output Format</h2>
+
+      <div class="instructions">
+        যে Excel Column-এ data দিতে চাও,
+        প্রথমে সেই Column A / B / C / D / E box-এ click করো।
+        এরপর নিচের field-এ click করো।
+        একই column-এ একাধিক field দিলে সেগুলো
+        <b>|</b> দিয়ে একই cell-এর ভিতরে থাকবে।
+      </div>
+
+      <div class="columns">
+
+        <div
+          class="column-box active-column"
+          data-column="0"
+          onclick="selectColumn(0)"
+        >
+          <div class="column-title">
+            Column A
+          </div>
+
+          <div
+            class="column-fields"
+            id="outputCol0"
+          ></div>
+        </div>
+
+
+        <div
+          class="column-box"
+          data-column="1"
+          onclick="selectColumn(1)"
+        >
+          <div class="column-title">
+            Column B
+          </div>
+
+          <div
+            class="column-fields"
+            id="outputCol1"
+          ></div>
+        </div>
+
+
+        <div
+          class="column-box"
+          data-column="2"
+          onclick="selectColumn(2)"
+        >
+          <div class="column-title">
+            Column C
+          </div>
+
+          <div
+            class="column-fields"
+            id="outputCol2"
+          ></div>
+        </div>
+
+
+        <div
+          class="column-box"
+          data-column="3"
+          onclick="selectColumn(3)"
+        >
+          <div class="column-title">
+            Column D
+          </div>
+
+          <div
+            class="column-fields"
+            id="outputCol3"
+          ></div>
+        </div>
+
+
+        <div
+          class="column-box"
+          data-column="4"
+          onclick="selectColumn(4)"
+        >
+          <div class="column-title">
+            Column E
+          </div>
+
+          <div
+            class="column-fields"
+            id="outputCol4"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="section-title">
+        Select Field
+      </div>
+
+      <div
+        class="field-grid"
+        id="outputFieldButtons"
+      ></div>
+
+
+      <div class="actions">
+
+        <button
+          class="secondary-btn"
+          onclick="clearOutput()"
+        >
+          Clear Output
+        </button>
+
+        <button
+          class="main-btn"
+          onclick="showPreview()"
+        >
+          Preview Data
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PREVIEW -->
+    <div class="card">
+
+      <h2>4. Preview & Download</h2>
+
+      <div
+        id="previewMessage"
+        class="warning"
+      >
+        এখনো preview তৈরি করা হয়নি।
+      </div>
+
+      <div class="preview-wrap">
+
+        <table
+          id="previewTable"
+          style="display:none"
+        >
+
+          <thead>
+            <tr>
+              <th>Column A</th>
+              <th>Column B</th>
+              <th>Column C</th>
+              <th>Column D</th>
+              <th>Column E</th>
+            </tr>
+          </thead>
+
+          <tbody
+            id="previewBody"
+          ></tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="main-btn"
+          onclick="convertAndDownload()"
+        >
+          Convert & Download XLSX
+        </button>
+
+      </div>
+
+      <div
+        class="status"
+        id="status"
+      ></div>
+
+    </div>
+
   </div>
 
 
-  <!-- CURRENT FORMAT -->
-  <div class="card">
-    <h2>Current File Format</h2>
-
-    <p>
-      তোমার TXT file-এ data যেই order-এ আছে,
-      ঠিক সেই order-এ নিচের button-গুলো click করো।
-    </p>
-
-    <div class="field-grid" id="currentFieldButtons"></div>
-
-    <div class="selected-box">
-      <div class="label">
-        Current format:
-      </div>
-
-      <div class="chips" id="currentFormatChips"></div>
-    </div>
+  <div class="footer">
+    Mahi xD • Smart TXT → XLSX Converter
   </div>
-
-
-  <!-- OUTPUT FORMAT -->
-  <div class="card">
-    <h2>Convert To Format</h2>
-
-    <div class="instruction">
-      প্রথমে Column A/B/C/D/E-এর যেকোনো একটি box select করো।
-      তারপর নিচ থেকে field click করো। একই column-এ একাধিক field দিলে
-      Excel cell-এর ভিতরে exact <b>|</b> দিয়ে join হবে।
-    </div>
-
-    <div class="columns">
-
-      <div class="column-box active-column"
-           data-column="0"
-           onclick="selectColumn(0)">
-        <div class="column-title">Column A</div>
-        <div class="column-fields" id="outputCol0"></div>
-      </div>
-
-      <div class="column-box"
-           data-column="1"
-           onclick="selectColumn(1)">
-        <div class="column-title">Column B</div>
-        <div class="column-fields" id="outputCol1"></div>
-      </div>
-
-      <div class="column-box"
-           data-column="2"
-           onclick="selectColumn(2)">
-        <div class="column-title">Column C</div>
-        <div class="column-fields" id="outputCol2"></div>
-      </div>
-
-      <div class="column-box"
-           data-column="3"
-           onclick="selectColumn(3)">
-        <div class="column-title">Column D</div>
-        <div class="column-fields" id="outputCol3"></div>
-      </div>
-
-      <div class="column-box"
-           data-column="4"
-           onclick="selectColumn(4)">
-        <div class="column-title">Column E</div>
-        <div class="column-fields" id="outputCol4"></div>
-      </div>
-
-    </div>
-
-    <div class="section-title" style="margin-top:22px">
-      Select Field
-    </div>
-
-    <div class="field-grid" id="outputFieldButtons"></div>
-
-    <div class="actions">
-      <button class="small-btn" onclick="clearOutput()">
-        Clear Output
-      </button>
-
-      <button class="main-btn" onclick="showPreview()">
-        Preview Data
-      </button>
-    </div>
-  </div>
-
-
-  <!-- PREVIEW -->
-  <div class="card">
-    <h2>Preview</h2>
-
-    <div id="previewMessage" class="warning">
-      এখনো preview তৈরি করা হয়নি।
-    </div>
-
-    <div class="preview">
-      <table id="previewTable" style="display:none">
-        <thead>
-          <tr>
-            <th>Column A</th>
-            <th>Column B</th>
-            <th>Column C</th>
-            <th>Column D</th>
-            <th>Column E</th>
-          </tr>
-        </thead>
-
-        <tbody id="previewBody"></tbody>
-      </table>
-    </div>
-
-    <div class="actions">
-      <button class="main-btn" onclick="convertAndDownload()">
-        Convert & Download XLSX
-      </button>
-    </div>
-
-    <div class="status" id="status"></div>
-  </div>
-
-</div>
 
 
 <script>
+
+/* =========================================
+   AVAILABLE FIELDS
+========================================= */
 
 const AVAILABLE_FIELDS = [
   "UID",
@@ -516,7 +844,13 @@ const AVAILABLE_FIELDS = [
   "Cookies"
 ];
 
+
+/* =========================================
+   VARIABLES
+========================================= */
+
 let rawText = "";
+
 let lines = [];
 
 let currentFormat = [];
@@ -532,232 +866,388 @@ let outputColumns = [
 let selectedColumn = 0;
 
 
-/* -------------------------------------
-   CREATE BUTTONS
-------------------------------------- */
+/* =========================================
+   CREATE FIELD BUTTONS
+========================================= */
 
 function buildFieldButtons() {
 
   const currentBox =
-    document.getElementById("currentFieldButtons");
+    document.getElementById(
+      "currentFieldButtons"
+    );
 
   const outputBox =
-    document.getElementById("outputFieldButtons");
+    document.getElementById(
+      "outputFieldButtons"
+    );
 
   currentBox.innerHTML = "";
+
   outputBox.innerHTML = "";
+
 
   AVAILABLE_FIELDS.forEach(field => {
 
-    const btn1 = document.createElement("button");
+    /* CURRENT FORMAT BUTTON */
 
-    btn1.className = "field-btn";
+    const currentButton =
+      document.createElement("button");
 
-    btn1.innerHTML =
-      `<span>${field}</span><span class="plus">+</span>`;
+    currentButton.className =
+      "field-btn";
 
-    btn1.onclick = function() {
-      addCurrentField(field);
-    };
+    currentButton.innerHTML =
+      `
+        <span>${field}</span>
+        <span class="plus">+</span>
+      `;
 
-    currentBox.appendChild(btn1);
+    currentButton.onclick =
+      function() {
+
+        addCurrentField(field);
+
+      };
+
+    currentBox.appendChild(
+      currentButton
+    );
 
 
-    const btn2 = document.createElement("button");
+    /* OUTPUT BUTTON */
 
-    btn2.className = "field-btn";
+    const outputButton =
+      document.createElement("button");
 
-    btn2.innerHTML =
-      `<span>${field}</span><span class="plus">+</span>`;
+    outputButton.className =
+      "field-btn";
 
-    btn2.onclick = function() {
-      addOutputField(field);
-    };
+    outputButton.innerHTML =
+      `
+        <span>${field}</span>
+        <span class="plus">+</span>
+      `;
 
-    outputBox.appendChild(btn2);
+    outputButton.onclick =
+      function() {
+
+        addOutputField(field);
+
+      };
+
+    outputBox.appendChild(
+      outputButton
+    );
 
   });
 
 }
 
 
-/* -------------------------------------
+/* =========================================
    FILE UPLOAD
-------------------------------------- */
+========================================= */
 
 document
-.getElementById("fileInput")
-.addEventListener("change", function(event) {
+  .getElementById("fileInput")
+  .addEventListener(
+    "change",
+    function(event) {
 
-  const file = event.target.files[0];
+      const file =
+        event.target.files[0];
 
-  if (!file) {
-    return;
-  }
-
-  document.getElementById("fileName").textContent =
-    file.name;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-
-    rawText = e.target.result;
-
-    /*
-      IMPORTANT:
-      কোনো trim করা হচ্ছে না।
-      কোনো replace করা হচ্ছে না।
-      কোনো symbol remove করা হচ্ছে না।
-    */
-
-    lines = rawText.split(/\r?\n/);
-
-    document.getElementById("status").textContent =
-      "TXT file loaded successfully.";
-
-  };
-
-  reader.onerror = function() {
-
-    document.getElementById("status").textContent =
-      "TXT file read করা যায়নি।";
-
-  };
-
-  reader.readAsText(file, "UTF-8");
-
-});
+      if (!file) {
+        return;
+      }
 
 
-/* -------------------------------------
-   CURRENT FORMAT
-------------------------------------- */
+      document
+        .getElementById("fileName")
+        .textContent =
+        file.name;
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(e) {
+
+          /*
+            RAW TEXT রাখা হচ্ছে।
+
+            কোনো trim()
+            কোনো replace()
+            কোনো symbol remove
+            কিছুই করা হবে না।
+          */
+
+          rawText =
+            e.target.result;
+
+
+          lines =
+            rawText.split(/\r?\n/);
+
+
+          document
+            .getElementById("status")
+            .textContent =
+            "✅ TXT file successfully loaded.";
+
+        };
+
+
+      reader.onerror =
+        function() {
+
+          document
+            .getElementById("status")
+            .textContent =
+            "❌ TXT file read করা যায়নি।";
+
+        };
+
+
+      reader.readAsText(
+        file,
+        "UTF-8"
+      );
+
+    }
+  );
+
+
+/* =========================================
+   CURRENT TXT FORMAT
+========================================= */
 
 function addCurrentField(field) {
 
   /*
-    একই field দুইবার add না করা
+    একই field দুইবার না
   */
 
-  if (currentFormat.includes(field)) {
+  if (
+    currentFormat.includes(field)
+  ) {
+
     return;
+
   }
+
 
   currentFormat.push(field);
 
   renderCurrentFormat();
+
 }
 
 
 function removeCurrentField(index) {
 
-  currentFormat.splice(index, 1);
+  currentFormat.splice(
+    index,
+    1
+  );
+
 
   /*
-    Current format change হলে
-    output-এ invalid field থাকলে remove
+    Current format থেকে field remove হলে
+    Output থেকেও সেই field remove হবে।
   */
 
   outputColumns =
-    outputColumns.map(column =>
-      column.filter(field =>
-        currentFormat.includes(field)
-      )
+    outputColumns.map(
+      column =>
+
+        column.filter(
+          field =>
+            currentFormat.includes(field)
+        )
+
     );
 
+
   renderCurrentFormat();
+
   renderOutput();
+
 }
 
 
 function renderCurrentFormat() {
 
   const box =
-    document.getElementById("currentFormatChips");
+    document.getElementById(
+      "currentFormatChips"
+    );
+
 
   box.innerHTML = "";
 
-  currentFormat.forEach((field, index) => {
 
-    const chip =
-      document.createElement("div");
+  currentFormat.forEach(
+    (field, index) => {
 
-    chip.className = "chip";
+      const chip =
+        document.createElement("div");
 
-    chip.innerHTML =
-      `${field}
-      <span onclick="removeCurrentField(${index})">×</span>`;
 
-    box.appendChild(chip);
+      chip.className =
+        "chip";
 
-  });
+
+      /*
+        text field-এর data না,
+        শুধু UI label।
+      */
+
+      const fieldText =
+        document.createElement("div");
+
+      fieldText.textContent =
+        field;
+
+
+      const removeButton =
+        document.createElement("span");
+
+      removeButton.textContent =
+        "×";
+
+
+      removeButton.onclick =
+        function() {
+
+          removeCurrentField(
+            index
+          );
+
+        };
+
+
+      chip.appendChild(
+        fieldText
+      );
+
+      chip.appendChild(
+        removeButton
+      );
+
+
+      box.appendChild(
+        chip
+      );
+
+    }
+  );
 
 }
 
 
-/* -------------------------------------
-   SELECT EXCEL COLUMN
-------------------------------------- */
+/* =========================================
+   SELECT COLUMN
+========================================= */
 
 function selectColumn(index) {
 
-  selectedColumn = index;
+  selectedColumn =
+    index;
+
 
   document
-    .querySelectorAll(".column-box")
-    .forEach(box => {
+    .querySelectorAll(
+      ".column-box"
+    )
+    .forEach(
+      box => {
 
-      box.classList.remove("active-column");
+        box.classList.remove(
+          "active-column"
+        );
 
-    });
+      }
+    );
+
 
   document
-    .querySelector(`[data-column="${index}"]`)
-    .classList
-    .add("active-column");
+    .querySelector(
+      `[data-column="${index}"]`
+    )
+    .classList.add(
+      "active-column"
+    );
 
 }
 
 
-/* -------------------------------------
-   OUTPUT FORMAT
-------------------------------------- */
+/* =========================================
+   OUTPUT FIELD
+========================================= */
 
 function addOutputField(field) {
 
-  if (!currentFormat.includes(field)) {
-
-    alert(
-      field +
-      " Current File Format-এ add করা নেই।"
-    );
-
-    return;
-  }
-
   /*
-    Same output column-এ duplicate field prevent
+    TXT format-এ field না থাকলে
+    output-এ নেওয়া যাবে না।
   */
 
   if (
-    outputColumns[selectedColumn]
-    .includes(field)
+    !currentFormat.includes(field)
   ) {
+
+    alert(
+      field +
+      " Current TXT Format-এ add করা নেই।"
+    );
+
     return;
+
   }
 
-  outputColumns[selectedColumn].push(field);
+
+  /*
+    একই Excel column-এর মধ্যে
+    duplicate field prevent।
+  */
+
+  if (
+    outputColumns[
+      selectedColumn
+    ].includes(field)
+  ) {
+
+    return;
+
+  }
+
+
+  outputColumns[
+    selectedColumn
+  ].push(field);
+
 
   renderOutput();
 
 }
 
 
-function removeOutputField(columnIndex, fieldIndex) {
+function removeOutputField(
+  columnIndex,
+  fieldIndex
+) {
 
-  outputColumns[columnIndex]
-    .splice(fieldIndex, 1);
+  outputColumns[
+    columnIndex
+  ].splice(
+    fieldIndex,
+    1
+  );
+
 
   renderOutput();
 
@@ -771,30 +1261,70 @@ function renderOutput() {
 
       const box =
         document.getElementById(
-          "outputCol" + columnIndex
+          "outputCol" +
+          columnIndex
         );
 
+
       box.innerHTML = "";
+
 
       column.forEach(
         (field, fieldIndex) => {
 
           const chip =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
-          chip.className = "mini-chip";
 
-          chip.innerHTML =
-            `${field}
-            <span onclick="
+          chip.className =
+            "mini-chip";
+
+
+          const fieldText =
+            document.createElement(
+              "div"
+            );
+
+          fieldText.textContent =
+            field;
+
+
+          const removeButton =
+            document.createElement(
+              "span"
+            );
+
+          removeButton.textContent =
+            "×";
+
+
+          removeButton.onclick =
+            function(event) {
+
               event.stopPropagation();
-              removeOutputField(
-                ${columnIndex},
-                ${fieldIndex}
-              )
-            ">×</span>`;
 
-          box.appendChild(chip);
+              removeOutputField(
+                columnIndex,
+                fieldIndex
+              );
+
+            };
+
+
+          chip.appendChild(
+            fieldText
+          );
+
+          chip.appendChild(
+            removeButton
+          );
+
+
+          box.appendChild(
+            chip
+          );
 
         }
       );
@@ -804,6 +1334,10 @@ function renderOutput() {
 
 }
 
+
+/* =========================================
+   CLEAR OUTPUT
+========================================= */
 
 function clearOutput() {
 
@@ -815,29 +1349,28 @@ function clearOutput() {
     []
   ];
 
+
   renderOutput();
 
 }
 
 
-/* -------------------------------------
-   DATA PARSING
-------------------------------------- */
+/* =========================================
+   PARSE LINE
+========================================= */
 
 function parseLine(line) {
 
   /*
-    ONLY pipe separator দিয়ে split করা হচ্ছে।
+    শুধু | separator ব্যবহার করা হচ্ছে।
 
-    কোনো:
-    trim
-    replace
-    lowercase
-    uppercase
-    number conversion
-    symbol cleaning
+    IMPORTANT:
 
-    কিছুই করা হচ্ছে না।
+    কোনো trim নেই
+    কোনো replace নেই
+    কোনো lowercase নেই
+    কোনো uppercase নেই
+    কোনো character cleaning নেই
   */
 
   return line.split("|");
@@ -845,156 +1378,268 @@ function parseLine(line) {
 }
 
 
-/* -------------------------------------
+/* =========================================
    BUILD OUTPUT ROW
-------------------------------------- */
+========================================= */
 
 function buildOutputRow(parts) {
 
   const fieldValueMap = {};
 
+
   currentFormat.forEach(
     (field, index) => {
 
       /*
-        Original value exactly রাখবে
+        TXT-এর value
+        exactly যেমন আছে
+        তেমন রাখা হচ্ছে।
       */
 
-      fieldValueMap[field] =
+      if (
         parts[index] !== undefined
-          ? parts[index]
-          : "";
+      ) {
+
+        fieldValueMap[field] =
+          parts[index];
+
+      } else {
+
+        fieldValueMap[field] =
+          "";
+
+      }
 
     }
   );
 
 
-  const row = outputColumns.map(column => {
+  const outputRow =
+    outputColumns.map(
+      column => {
 
-    const values =
-      column.map(field =>
-        fieldValueMap[field] ?? ""
-      );
+        const values =
+          column.map(
+            field => {
 
-    /*
-      Multiple field হলে ONLY | দিয়ে join
-    */
+              if (
+                fieldValueMap[field]
+                !== undefined
+              ) {
 
-    return values.join("|");
+                return fieldValueMap[
+                  field
+                ];
 
-  });
+              }
 
-  return row;
+              return "";
+
+            }
+          );
+
+
+        /*
+          একই Excel cell-এ
+          multiple field থাকলে
+
+          EXACT "|" separator
+        */
+
+        return values.join("|");
+
+      }
+    );
+
+
+  return outputRow;
 
 }
 
 
-/* -------------------------------------
+/* =========================================
    PREVIEW
-------------------------------------- */
+========================================= */
 
 function showPreview() {
 
   const previewTable =
-    document.getElementById("previewTable");
+    document.getElementById(
+      "previewTable"
+    );
 
-  const body =
-    document.getElementById("previewBody");
 
-  const message =
-    document.getElementById("previewMessage");
+  const previewBody =
+    document.getElementById(
+      "previewBody"
+    );
+
+
+  const previewMessage =
+    document.getElementById(
+      "previewMessage"
+    );
 
 
   if (!rawText) {
 
-    alert("আগে TXT file upload করো।");
-
-    return;
-  }
-
-
-  if (currentFormat.length === 0) {
-
     alert(
-      "Current File Format select করো।"
+      "আগে TXT file upload করো।"
     );
 
     return;
+
+  }
+
+
+  if (
+    currentFormat.length === 0
+  ) {
+
+    alert(
+      "আগে Current TXT Format select করো।"
+    );
+
+    return;
+
   }
 
 
   const hasOutput =
     outputColumns.some(
-      column => column.length > 0
+      column =>
+        column.length > 0
     );
+
 
   if (!hasOutput) {
 
     alert(
-      "কমপক্ষে একটি output field select করো।"
+      "Excel Output Format select করো।"
     );
 
     return;
+
   }
 
 
-  body.innerHTML = "";
+  previewBody.innerHTML =
+    "";
 
-  let shown = 0;
 
-  for (const line of lines) {
+  let shown =
+    0;
 
-    if (line.length === 0) {
-      continue;
-    }
 
-    const parts = parseLine(line);
+  let skipped =
+    0;
+
+
+  for (
+    const line of lines
+  ) {
 
     /*
-      Current format-এর field count-এর
-      চেয়ে কম হলে preview skip
+      শুধু পুরোপুরি empty line skip
+    */
+
+    if (
+      line.length === 0
+    ) {
+
+      continue;
+
+    }
+
+
+    const parts =
+      parseLine(line);
+
+
+    /*
+      Required field count না থাকলে
+      malformed line হিসেবে skip।
     */
 
     if (
       parts.length <
       currentFormat.length
     ) {
+
+      skipped++;
+
       continue;
+
     }
 
-    const outputRow =
-      buildOutputRow(parts);
+
+    const row =
+      buildOutputRow(
+        parts
+      );
+
 
     const tr =
-      document.createElement("tr");
+      document.createElement(
+        "tr"
+      );
 
-    outputRow.forEach(value => {
 
-      const td =
-        document.createElement("td");
+    row.forEach(
+      value => {
 
-      /*
-        innerHTML ব্যবহার না করে
-        textContent ব্যবহার করা হচ্ছে।
+        const td =
+          document.createElement(
+            "td"
+          );
 
-        তাই data-এর symbol/HTML
-        modify হবে না।
-      */
 
-      td.textContent = value;
+        /*
+          innerHTML ব্যবহার না করে
+          textContent ব্যবহার করা হচ্ছে।
 
-      td.title = value;
+          তাই data-এর:
+          <
+          >
+          &
+          /
+          @
+          .
+          =
+          ;
+          ইত্যাদি UI rendering-এ
+          পরিবর্তিত হবে না।
+        */
 
-      tr.appendChild(td);
+        td.textContent =
+          value;
 
-    });
+        td.title =
+          value;
 
-    body.appendChild(tr);
+
+        tr.appendChild(
+          td
+        );
+
+      }
+    );
+
+
+    previewBody.appendChild(
+      tr
+    );
+
 
     shown++;
 
-    if (shown >= 10) {
+
+    if (
+      shown >= 10
+    ) {
+
       break;
+
     }
 
   }
@@ -1003,58 +1648,73 @@ function showPreview() {
   previewTable.style.display =
     "table";
 
-  message.textContent =
+
+  previewMessage.textContent =
     "প্রথম " +
     shown +
-    "টি valid row দেখানো হচ্ছে।";
+    "টি valid row দেখানো হচ্ছে।" +
+    (
+      skipped > 0
+        ? " Skipped: " + skipped
+        : ""
+    );
 
 }
 
 
-/* -------------------------------------
-   CONVERT TO XLSX
-------------------------------------- */
+/* =========================================
+   CONVERT & DOWNLOAD
+========================================= */
 
 function convertAndDownload() {
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
 
 
   if (!rawText) {
 
     status.textContent =
-      "আগে TXT file upload করো।";
+      "❌ আগে TXT file upload করো।";
 
     return;
+
   }
 
 
-  if (currentFormat.length === 0) {
+  if (
+    currentFormat.length === 0
+  ) {
 
     status.textContent =
-      "Current File Format select করো।";
+      "❌ Current TXT Format select করো।";
 
     return;
+
   }
 
 
   const hasOutput =
     outputColumns.some(
-      column => column.length > 0
+      column =>
+        column.length > 0
     );
 
 
   if (!hasOutput) {
 
     status.textContent =
-      "Output format select করো।";
+      "❌ Excel Output Format select করো।";
 
     return;
+
   }
 
 
   const rows = [
+
     [
       "Column A",
       "Column B",
@@ -1062,17 +1722,28 @@ function convertAndDownload() {
       "Column D",
       "Column E"
     ]
+
   ];
 
 
-  let converted = 0;
-  let skipped = 0;
+  let converted =
+    0;
+
+  let skipped =
+    0;
 
 
-  for (const line of lines) {
+  for (
+    const line of lines
+  ) {
 
-    if (line.length === 0) {
+
+    if (
+      line.length === 0
+    ) {
+
       continue;
+
     }
 
 
@@ -1088,51 +1759,70 @@ function convertAndDownload() {
       skipped++;
 
       continue;
+
     }
 
 
     const outputRow =
-      buildOutputRow(parts);
+      buildOutputRow(
+        parts
+      );
 
 
-    rows.push(outputRow);
+    rows.push(
+      outputRow
+    );
+
 
     converted++;
 
   }
 
 
+  /*
+    Excel worksheet
+  */
+
   const worksheet =
-    XLSX.utils.aoa_to_sheet(rows);
+    XLSX.utils.aoa_to_sheet(
+      rows
+    );
 
 
   /*
-    সব cell force text করা হচ্ছে।
+    EVERY CELL FORCE TEXT
 
-    ফলে:
-    00123
-    00001
-    long ID
+    যাতে Excel:
+
+    001234
+    long UID
     token
     cookie
-    email
-    symbol
+    client id
 
-    Excel auto-format করার risk কমবে।
+    number/date/scientific notation
+    হিসেবে convert না করে।
   */
 
   for (
-    const cellAddress in worksheet
+    const cellAddress
+    in worksheet
   ) {
 
     if (
       cellAddress.startsWith("!")
     ) {
+
       continue;
+
     }
 
+
     const cell =
-      worksheet[cellAddress];
+      worksheet[
+        cellAddress
+      ];
+
 
     if (
       cell.v !== undefined &&
@@ -1142,21 +1832,33 @@ function convertAndDownload() {
       cell.v =
         String(cell.v);
 
-      cell.t = "s";
+      cell.t =
+        "s";
 
-      cell.z = "@";
+      cell.z =
+        "@";
 
     }
 
   }
 
 
+  /*
+    Excel column width
+  */
+
   worksheet["!cols"] = [
-    { wch: 28 },
-    { wch: 28 },
-    { wch: 55 },
-    { wch: 90 },
-    { wch: 35 }
+
+    { wch: 30 },
+
+    { wch: 30 },
+
+    { wch: 65 },
+
+    { wch: 100 },
+
+    { wch: 40 }
+
   ];
 
 
@@ -1164,21 +1866,26 @@ function convertAndDownload() {
     XLSX.utils.book_new();
 
 
-  XLSX.utils.book_append_sheet(
-    workbook,
-    worksheet,
-    "Converted Data"
-  );
+  XLSX.utils
+    .book_append_sheet(
+      workbook,
+      worksheet,
+      "Mahi xD Data"
+    );
 
+
+  /*
+    Download
+  */
 
   XLSX.writeFile(
     workbook,
-    "converted.xlsx"
+    "Mahi_xD_Converted.xlsx"
   );
 
 
   status.textContent =
-    "✅ Conversion Complete!\n\n" +
+    "✅ Conversion Complete!\n" +
     "Converted: " +
     converted +
     "\nSkipped: " +
@@ -1187,9 +1894,9 @@ function convertAndDownload() {
 }
 
 
-/* -------------------------------------
-   START
-------------------------------------- */
+/* =========================================
+   START WEBSITE
+========================================= */
 
 buildFieldButtons();
 
